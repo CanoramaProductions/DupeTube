@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #181818;
+            color: #fff;
+        }
 
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: #121212;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Video Page Styles */
+        .video-player {
+            width: 100%;
+            height: 500px;
+            background-color: #333;
+            border-radius: 8px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #555;
+            cursor: pointer;
+        }
+        .progress-bar span {
+            display: block;
+            width: 0;
+            height: 100%;
+            background-color: #f44336;
+        }
+
+        /* Video Details */
+        .video-details {
+            margin-bottom: 20px;
+        }
+        .video-details h1 {
+            font-size: 24px;
+            color: #fff;
+        }
+        .metadata {
+            color: #aaa;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+        }
+        .comment {
+            background-color: #222;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .comment .username {
+            font-weight: bold;
+            color: #fff;
+        }
+        .comment .text {
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">YouTube</div>
+    </div>
+
+    <!-- Video Player Section -->
+    <div class="video-player">
+        <video id="video-player" width="100%" height="100%" controls>
+            <source src="path/to/video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="progress-bar">
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Video Details -->
+    <div class="video-details">
+        <h1 id="video-title">Loading...</h1>
+        <div id="video-metadata" class="metadata">Loading...</div>
+        <p id="video-description">Loading...</p>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="comments-section">
+        <div class="comment">
+            <div class="username">RandomUser123</div>
+            <div class="text">Great video! Really enjoyed it.</div>
+        </div>
+        <div class="comment">
+            <div class="username">TechFan77</div>
+            <div class="text">I learned so much from this! Keep it up!</div>
+        </div>
+        <!-- Add more fake comments -->
+    </div>
+
+    <script>
+        // Function to get parameters from URL
+        function getUrlParameter(name) {
+            var url = new URL(window.location.href);
+            return url.searchParams.get(name);
+        }
+
+        // Set video details from URL
+        document.getElementById('video-title').textContent = decodeURIComponent(getUrlParameter('title'));
+        document.getElementById('video-metadata').textContent = 
+            `Views: ${decodeURIComponent(getUrlParameter('views'))} | ` +
+            `Uploaded: ${decodeURIComponent(getUrlParameter('date'))} | ` +
+            `By: ${decodeURIComponent(getUrlParameter('uploader'))}`;
+        document.getElementById('video-description').textContent = decodeURIComponent(getUrlParameter('description'));
+
+        // Video progress bar update
+        const videoPlayer = document.getElementById('video-player');
+        const progressBar = document.querySelector('.progress-bar span');
+
+        videoPlayer.addEventListener('timeupdate', () => {
+            const percentage = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+            progressBar.style.width = percentage + '%';
+        });
+
+        // Add functionality for seeking video
+        document.querySelector('.progress-bar').addEventListener('click', (event) => {
+            const rect = event.target.getBoundingClientRect();
+            const offsetX = event.clientX - rect.left;
+            const percentage = offsetX / rect.width;
+            videoPlayer.currentTime = percentage * videoPlayer.duration;
+        });
+    </script>
+</body>
+</html>
