@@ -105,63 +105,6 @@
             text-decoration: none;
             margin: 0 10px;
         }
-
-        /* Video Page */
-        .video-page {
-            padding: 20px;
-        }
-        .video-player {
-            width: 100%;
-            height: 500px;
-            background-color: #333;
-            border-radius: 8px;
-            position: relative;
-            margin-bottom: 20px;
-        }
-        .video-player .progress-bar {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background-color: #555;
-            cursor: pointer;
-        }
-        .progress-bar span {
-            display: block;
-            width: 0;
-            height: 100%;
-            background-color: #f44336;
-        }
-        .video-details {
-            margin-bottom: 20px;
-        }
-        .video-details h1 {
-            font-size: 24px;
-            color: #fff;
-        }
-        .video-details .metadata {
-            color: #aaa;
-        }
-        .comments-section {
-            margin-top: 40px;
-        }
-        .comments-section h2 {
-            color: #fff;
-        }
-        .comment {
-            background-color: #222;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 8px;
-        }
-        .comment .username {
-            font-weight: bold;
-            color: #fff;
-        }
-        .comment .text {
-            color: #bbb;
-        }
     </style>
 </head>
 <body>
@@ -189,13 +132,13 @@
 
     <!-- Main Content Area -->
     <div class="main-content">
-        <div class="video-card" onclick="goToVideoPage()">
+        <div class="video-card" onclick="goToVideoPage('Video Title 1', 'https://via.placeholder.com/300x200', '1M', '1 year ago', 'YouTuber Name', 'This is a short description of the video.')">
             <img src="https://via.placeholder.com/300x200" alt="Video Thumbnail">
             <div class="title" contenteditable="true">Video Title 1</div>
             <div class="description" contenteditable="true">This is a short description of the video.</div>
             <div class="metadata" contenteditable="true">Views: 1M | Uploaded: 1 year ago | By: YouTuber Name</div>
         </div>
-        <div class="video-card" onclick="goToVideoPage()">
+        <div class="video-card" onclick="goToVideoPage('Video Title 2', 'https://via.placeholder.com/300x200', '2M', '2 years ago', 'Another YouTuber', 'This is a short description of the video.')">
             <img src="https://via.placeholder.com/300x200" alt="Video Thumbnail">
             <div class="title" contenteditable="true">Video Title 2</div>
             <div class="description" contenteditable="true">This is a short description of the video.</div>
@@ -212,65 +155,16 @@
         <a href="#">Help</a>
     </div>
 
-    <!-- Video Page (video.html) -->
-    <div class="video-page" id="videoPage" style="display:none;">
-        <div class="video-player">
-            <div class="progress-bar" onclick="seek(event)">
-                <span id="progress"></span>
-            </div>
-        </div>
-        <div class="video-details">
-            <h1 id="videoTitle">Video Title</h1>
-            <div class="metadata">
-                <span id="videoViews">Views: 0</span> |
-                <span id="videoDate">Uploaded: 0 days ago</span> |
-                <span id="videoUploader">By: Unknown</span>
-            </div>
-        </div>
-        <div class="comments-section">
-            <h2>Comments</h2>
-            <div class="comment">
-                <div class="username">JohnDoe</div>
-                <div class="text">Great video! Loved it.</div>
-            </div>
-            <div class="comment">
-                <div class="username">JaneSmith</div>
-                <div class="text">Nice content, but could use some improvement.</div>
-            </div>
-            <!-- Add more comments as needed -->
-        </div>
-    </div>
-
     <script>
-        function goToVideoPage() {
-            // Gather editable content
-            var title = document.querySelector('.video-card .title').innerText;
-            var description = document.querySelector('.video-card .description').innerText;
-            var metadata = document.querySelector('.video-card .metadata').innerText.split('|');
-            var views = metadata[0].split(":")[1].trim();
-            var date = metadata[1].split(":")[1].trim();
-            var uploader = metadata[2].split(":")[1].trim();
-
-            // Set data on video page
-            document.getElementById('videoTitle').innerText = title;
-            document.getElementById('videoViews').innerText = 'Views: ' + views;
-            document.getElementById('videoDate').innerText = 'Uploaded: ' + date;
-            document.getElementById('videoUploader').innerText = 'By: ' + uploader;
-
-            // Show the video page and hide the main content
-            document.querySelector('.main-content').style.display = 'none';
-            document.getElementById('videoPage').style.display = 'block';
-        }
-
-        // Time progress bar functionality
-        function seek(event) {
-            var progressBar = document.querySelector('.progress-bar');
-            var progress = document.getElementById('progress');
-            var rect = progressBar.getBoundingClientRect();
-            var offsetX = event.clientX - rect.left;
-            var width = progressBar.offsetWidth;
-            var percentage = offsetX / width;
-            progress.style.width = percentage * 100 + '%';
+        // Function to redirect to video page and pass data through URL
+        function goToVideoPage(title, thumbnail, views, date, uploader, description) {
+            var videoPageURL = 'video.html?title=' + encodeURIComponent(title) + 
+                               '&thumbnail=' + encodeURIComponent(thumbnail) + 
+                               '&views=' + encodeURIComponent(views) + 
+                               '&date=' + encodeURIComponent(date) + 
+                               '&uploader=' + encodeURIComponent(uploader) + 
+                               '&description=' + encodeURIComponent(description);
+            window.location.href = videoPageURL;
         }
     </script>
 </body>
