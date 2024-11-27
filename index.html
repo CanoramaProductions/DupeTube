@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube GUI Replication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: #222;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .navbar .search-bar input {
+            padding: 5px;
+            width: 300px;
+            border-radius: 20px;
+            border: none;
+        }
+        .navbar .profile {
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: #f1f1f1;
+            width: 200px;
+            position: fixed;
+            top: 50px;
+            bottom: 0;
+            padding-top: 20px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 15px;
+            font-size: 16px;
+        }
+        .sidebar li:hover {
+            background-color: #ddd;
+            cursor: pointer;
+        }
+
+        /* Main Content Area Styles */
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .video-card {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .video-card img {
+            width: 100%;
+            height: auto;
+        }
+        .video-card .title {
+            font-size: 18px;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .video-card .description {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+        .footer a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">YouTube</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="profile">Profile</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li>Home</li>
+            <li>Trending</li>
+            <li>Subscriptions</li>
+            <li>Library</li>
+            <li>History</li>
+            <li>Your Videos</li>
+            <li>Watch Later</li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="video-card">
+            <img src="https://via.placeholder.com/300x200" alt="Video Thumbnail">
+            <div class="title">Video Title 1</div>
+            <div class="description">This is a short description of the video.</div>
+        </div>
+        <div class="video-card">
+            <img src="https://via.placeholder.com/300x200" alt="Video Thumbnail">
+            <div class="title">Video Title 2</div>
+            <div class="description">This is a short description of the video.</div>
+        </div>
+        <div class="video-card">
+            <img src="https://via.placeholder.com/300x200" alt="Video Thumbnail">
+            <div class="title">Video Title 3</div>
+            <div class="description">This is a short description of the video.</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <a href="#">About</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Help</a>
+    </div>
+</body>
+</html>
